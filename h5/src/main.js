@@ -52,6 +52,7 @@ function createSetupPage() {
         <label>${t('setup.token')}</label>
         <input type="password" id="input-token" placeholder="${t('setup.token.placeholder')}" />
       </div>
+      <div class="setup-hint" id="setup-hint" style="display:none"></div>
       <button class="btn-primary" id="connect-btn">${t('setup.connect')}</button>
       <div class="setup-error" id="setup-error"></div>
       <div class="setup-tips">
@@ -101,6 +102,18 @@ function initApp() {
   if (config) {
     hostInput.value = config.host
     tokenInput.value = config.token
+  }
+
+  // 自动检测 Token（仅 localhost 可用）
+  if (!config?.token) {
+    fetch('/api/setup-hint').then(r => r.json()).then(data => {
+      if (data.ok && data.token && !tokenInput.value) {
+        tokenInput.value = data.token
+        tokenInput.type = 'text'
+        const hint = document.getElementById('setup-hint')
+        if (hint) { hint.textContent = t('setup.token.autofill'); hint.style.display = '' }
+      }
+    }).catch(() => {})
   }
 
   connectBtn.onclick = () => {

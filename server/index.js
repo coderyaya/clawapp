@@ -760,6 +760,19 @@ app.get('/media', (req, res) => {
 
 // ==================== API 路由 ====================
 
+/** GET /api/setup-hint — 仅 localhost 可访问，返回自动生成的连接密码 */
+app.get('/api/setup-hint', (req, res) => {
+  const ip = req.ip || req.connection?.remoteAddress || '';
+  const isLocal = ['127.0.0.1', '::1', '::ffff:127.0.0.1', 'localhost'].includes(ip);
+  if (!isLocal) {
+    return res.status(403).json({ ok: false });
+  }
+  if (!CONFIG.proxyToken) {
+    return res.json({ ok: false });
+  }
+  res.json({ ok: true, token: CONFIG.proxyToken });
+});
+
 /** POST /api/connect — 建立会话 */
 app.post('/api/connect', async (req, res) => {
   const { token } = req.body || {};

@@ -26,6 +26,7 @@ const messages = {
     'setup.tips.token.title': 'Token 填什么？',
     'setup.tips.token.desc': '安装 ClawApp 时你设置的连接密码。\n• 如果忘记了，可以在电脑上查看 server/.env 文件中的 PROXY_TOKEN\n• 也可以重新运行安装脚本重新设置',
     'setup.tips.doc': '查看完整文档',
+    'setup.token.autofill': '✅ 已自动检测到连接密码，直接点连接即可',
     // 聊天页
     'chat.input.placeholder': '输入消息...',
     'chat.send': '发送',
@@ -175,6 +176,7 @@ const messages = {
     'setup.tips.token.title': 'What is Token?',
     'setup.tips.token.desc': 'The connection password you set during ClawApp installation.\n• If forgotten, check PROXY_TOKEN in server/.env on your PC\n• Or re-run the install script to reset it',
     'setup.tips.doc': 'Full Documentation',
+    'setup.token.autofill': '✅ Token auto-detected, just tap Connect',
     'chat.input.placeholder': 'Type a message...',
     'chat.send': 'Send',
     'chat.abort': 'Stop',
